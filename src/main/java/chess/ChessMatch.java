@@ -1,7 +1,8 @@
 package chess;
 
 import boardgame.Board;
-import boardgame.Position;
+import boardgame.Piece;
+import chess.pieces.King;
 import chess.pieces.Rook;
 
 public class ChessMatch {
@@ -22,16 +23,21 @@ public class ChessMatch {
     public ChessPiece[][] getPieces() {
         var mat = new ChessPiece[board.getRows()][board.getColumns()];
         for (var i = 0; i < board.getRows(); i++) {
-            for (var j = 0; j < board.getColumns(); j++){
-                mat[i][j] = (ChessPiece) board.piece(i,j);
+            for (var j = 0; j < board.getColumns(); j++) {
+                mat[i][j] = (ChessPiece) board.piece(i, j);
             }
         }
         return mat;
     }
 
-    private void initialSetup(){
-        board.placePiece(new Rook(board, Color.WHITE), new Position(1,1));
-        board.placePiece(new Rook(board, Color.WHITE), new Position(1,0));
+    public void placeNewPiece(char column, int row, Piece piece) {
+        board.placePiece(piece, new ChessPosition(column, row).toPosition());
+    }
 
+    private void initialSetup() {
+        placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('b', 1, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 8, new Rook(board, Color.WHITE));
+        placeNewPiece('c', 7, new King(board, Color.WHITE));
     }
 }
