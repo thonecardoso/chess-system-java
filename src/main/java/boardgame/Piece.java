@@ -31,4 +31,8 @@ public abstract class Piece {
 
         return false;
     }
+
+    protected boolean isValidMove(Position position) {
+        return getBoard().positionExists(position) && !getBoard().thereIsAPiece(position);
+    }
 }

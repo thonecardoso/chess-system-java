@@ -22,15 +22,16 @@ public abstract class ChessPiece extends Piece {
 //
 //    }
 
-    private boolean isThereOpponentPiece(Position position){
-        return false;
+    protected boolean isThereOpponentPiece(Position position) {
+        var piece = (ChessPiece) getBoard().piece(position);
+        return piece != null && piece.getColor() != color;
     }
 
-    private void increaseMoveCount(){
+    private void increaseMoveCount() {
         this.moveCount++;
     }
 
-    private void decreaseMoveCount(){
+    private void decreaseMoveCount() {
         this.moveCount--;
     }
 }
