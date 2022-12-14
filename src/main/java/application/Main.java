@@ -1,6 +1,5 @@
 package application;
 
-import boardgame.Position;
 import chess.ChessException;
 import chess.ChessMatch;
 
@@ -20,6 +19,10 @@ public class Main {
                 System.out.println();
                 System.out.print("Source: ");
                 var source = UI.readChessPosition(sc);
+
+                var possibleMoves = chessMatch.possibleMoves(source);
+                UI.clearScreen();
+                UI.printBoard(chessMatch.getPieces(), possibleMoves);
 
                 System.out.println();
                 System.out.print("Target: ");

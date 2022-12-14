@@ -4,6 +4,7 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
 
+import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -50,7 +51,7 @@ public class UI {
         for (var i = 0; i < pieces.length; i++) {
             System.out.print((pieces.length - i) + " ");
             for (var j = 0; j < pieces[0].length; j++) {
-                printPiece(pieces[i][j]);
+                printPiece(pieces[i][j], false);
             }
             System.out.println();
         }
@@ -60,9 +61,26 @@ public class UI {
         }
     }
 
-    private static void printPiece(ChessPiece piece) {
+    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+        for (var i = 0; i < pieces.length; i++) {
+            System.out.print((pieces.length - i) + " ");
+            for (var j = 0; j < pieces[0].length; j++) {
+                printPiece(pieces[i][j], possibleMoves[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.print("  ");
+        for (var j = 0; j < pieces[0].length; j++) {
+            System.out.printf("%c ", 'a' + j);
+        }
+    }
+
+    private static void printPiece(ChessPiece piece, boolean background) {
+        if(background){
+            System.out.print(ANSI_BLUE_BACKGROUND);
+        }
         if (piece == null) {
-            System.out.print("-");
+            System.out.print("-" + ANSI_RESET);
         } else {
             if (piece.getColor() == Color.WHITE) {
                 System.out.print(ANSI_WHITE + piece + ANSI_RESET);
@@ -72,4 +90,5 @@ public class UI {
         }
         System.out.print(" ");
     }
+
 }

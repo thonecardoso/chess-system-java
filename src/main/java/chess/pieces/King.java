@@ -23,49 +23,50 @@ public class King extends ChessPiece {
 
         //above
         p.setValues(position.getRow() - 1, position.getColumn());
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
+        
 
         //below
         p.setValues(position.getRow() + 1, position.getColumn());
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //right
         p.setValues(position.getRow(), position.getColumn() + 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //left
         p.setValues(position.getRow(), position.getColumn() - 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //above-right
         p.setValues(position.getRow() - 1, position.getColumn() - 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //above-left
         p.setValues(position.getRow() - 1, position.getColumn() + 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //below-right
         p.setValues(position.getRow() + 1, position.getColumn() - 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
         //below-left
         p.setValues(position.getRow() + 1, position.getColumn() + 1);
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
+        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
             mat[p.getRow()][p.getColumn()] = true;
         }
 
