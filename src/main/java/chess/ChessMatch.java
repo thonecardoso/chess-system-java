@@ -6,12 +6,18 @@ import boardgame.Position;
 import chess.pieces.King;
 import chess.pieces.Rook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChessMatch {
 
     private Board board;
-
     private int turn;
     private Color currentPlayer;
+    private List<Piece> piecesOnTheBoard = new ArrayList<>();
+    private List<Piece> capturedPieces = new ArrayList<>();
+
+
     private boolean checkMate;
     private ChessPiece enPassantVulnerable;
     private ChessPiece promoted;
@@ -66,6 +72,11 @@ public class ChessMatch {
         var piece = board.removePiece(source);
         var capturedPiece = board.removePiece(target);
         board.placePiece(piece,target);
+
+        if(capturedPiece !=null){
+            piecesOnTheBoard.remove(capturedPiece);
+            capturedPieces.add(capturedPiece);
+        }
         return capturedPiece;
     }
 
@@ -87,8 +98,9 @@ public class ChessMatch {
         }
     }
 
-    public void placeNewPiece(char column, int row, Piece piece) {
+    public void placeNewPiece(char column, int row, ChessPiece piece) {
         board.placePiece(piece, new ChessPosition(column, row).toPosition());
+        piecesOnTheBoard.add(piece);
     }
 
     private void initialSetup() {
