@@ -1,5 +1,7 @@
 package boardgame;
 
+import java.util.List;
+
 public abstract class Piece {
     protected Board board;
     protected Position position;
@@ -13,6 +15,8 @@ public abstract class Piece {
     }
 
     public abstract boolean[][] possibleMoves();
+
+    public abstract List<String> possibleMovesStr();
 
     public boolean possibleMove(Position position) {
         return possibleMoves()[position.getRow()][position.getColumn()];
