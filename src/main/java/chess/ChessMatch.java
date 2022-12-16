@@ -36,7 +36,7 @@ public class ChessMatch {
     }
 
     public boolean isCheckMate() {
-        return checkMate;
+        return !checkMate;
     }
 
     public boolean isCheck() {
@@ -148,7 +148,8 @@ public class ChessMatch {
     }
 
     private Piece makeMove(Position source, Position target) {
-        var piece = board.removePiece(source);
+        var piece = (ChessPiece) board.removePiece(source);
+        piece.increaseMoveCount();
         var capturedPiece = board.removePiece(target);
         board.placePiece(piece, target);
 
@@ -160,7 +161,8 @@ public class ChessMatch {
     }
 
     private void undoMove(Position source, Position target, Piece capturedPiece) {
-        var piece = board.removePiece(target);
+        var piece = (ChessPiece)board.removePiece(target);
+        piece.decreaseMoveCount();
         board.placePiece(piece, source);
         if (capturedPiece != null) {
             board.placePiece(capturedPiece, target);

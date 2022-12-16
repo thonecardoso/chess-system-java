@@ -15,7 +15,7 @@ public class Main {
         var chessMatch = new ChessMatch();
         var captured = new ArrayList<ChessPiece>();
 
-        while (!chessMatch.isCheckMate()) {
+        while (chessMatch.isCheckMate()) {
             try {
                 UI.clearScreen();
                 UI.printMatch(chessMatch, captured);
