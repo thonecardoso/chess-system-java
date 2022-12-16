@@ -5,8 +5,8 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class King extends ChessPiece {
     public King(Board board, Color color) {
@@ -19,116 +19,58 @@ public class King extends ChessPiece {
     }
 
     @Override
-    public boolean[][] possibleMoves() {
-        var mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+    public Set<Position> possibleMoves() {
+        var moves = new HashSet<Position>();
 
         var p = new Position(0, 0);
 
         //above
         p.setValues(position.getRow() - 1, position.getColumn());
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
 
         //below
         p.setValues(position.getRow() + 1, position.getColumn());
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //right
         p.setValues(position.getRow(), position.getColumn() + 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //left
         p.setValues(position.getRow(), position.getColumn() - 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //above-right
         p.setValues(position.getRow() - 1, position.getColumn() - 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //above-left
         p.setValues(position.getRow() - 1, position.getColumn() + 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //below-right
         p.setValues(position.getRow() + 1, position.getColumn() - 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //below-left
         p.setValues(position.getRow() + 1, position.getColumn() + 1);
         if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            mat[p.getRow()][p.getColumn()] = true;
-        }
-
-        return mat;
-    }
-
-    @Override
-    public List<String> possibleMovesStr() {
-        var moves = new ArrayList<String>();
-
-        var p = new Position(0, 0);
-
-        //above
-        p.setValues(position.getRow() - 1, position.getColumn());
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-
-        //below
-        p.setValues(position.getRow() + 1, position.getColumn());
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //right
-        p.setValues(position.getRow(), position.getColumn() + 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //left
-        p.setValues(position.getRow(), position.getColumn() - 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //above-right
-        p.setValues(position.getRow() - 1, position.getColumn() - 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //above-left
-        p.setValues(position.getRow() - 1, position.getColumn() + 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //below-right
-        p.setValues(position.getRow() + 1, position.getColumn() - 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //below-left
-        p.setValues(position.getRow() + 1, position.getColumn() + 1);
-        if (isValidMove(p) || (getBoard().positionExists(p) && isThereOpponentPiece(p))) {
-            moves.add(""+p.getRow()+p.getColumn());
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         return moves;

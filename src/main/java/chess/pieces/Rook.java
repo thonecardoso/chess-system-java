@@ -5,8 +5,8 @@ import boardgame.Position;
 import chess.ChessPiece;
 import chess.Color;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Rook extends ChessPiece {
     public Rook(Board board, Color color) {
@@ -19,101 +19,50 @@ public class Rook extends ChessPiece {
     }
 
     @Override
-    public boolean[][] possibleMoves() {
-        var mat = new boolean[getBoard().getRows()][getBoard().getColumns()];
+    public Set<Position> possibleMoves() {
 
+        var moves = new HashSet<Position>();
         var p = new Position(0, 0);
 
         //above
         p.setValues(position.getRow() - 1, position.getColumn());
         while (isValidMove(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
             p.setRow(p.getRow() - 1);
         }
         if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //below
         p.setValues(position.getRow() + 1, position.getColumn());
         while (isValidMove(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
             p.setRow(p.getRow() + 1);
         }
         if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //left
         p.setValues(position.getRow(), position.getColumn() - 1);
         while (isValidMove(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
             p.setColumn(p.getColumn() - 1);
         }
         if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
 
         //right
         p.setValues(position.getRow(), position.getColumn() + 1);
         while (isValidMove(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
             p.setColumn(p.getColumn() + 1);
         }
         if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            mat[p.getRow()][p.getColumn()] = true;
+            moves.add(new Position(p.getRow(),p.getColumn()));
         }
-
-
-        return mat;
-    }
-
-    @Override
-    public List<String> possibleMovesStr() {
-
-        var moves = new ArrayList<String>();
-        var p = new Position(0, 0);
-
-        //above
-        p.setValues(position.getRow() - 1, position.getColumn());
-        while (isValidMove(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-            p.setRow(p.getRow() - 1);
-        }
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //below
-        p.setValues(position.getRow() + 1, position.getColumn());
-        while (isValidMove(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-            p.setRow(p.getRow() + 1);
-        }
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //left
-        p.setValues(position.getRow(), position.getColumn() - 1);
-        while (isValidMove(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-            p.setColumn(p.getColumn() - 1);
-        }
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
-        //right
-        p.setValues(position.getRow(), position.getColumn() + 1);
-        while (isValidMove(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-            p.setColumn(p.getColumn() + 1);
-        }
-        if (getBoard().positionExists(p) && isThereOpponentPiece(p)) {
-            moves.add(""+p.getRow()+p.getColumn());
-        }
-
 
         return moves;
     }

@@ -8,6 +8,7 @@ import chess.pieces.Rook;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ChessMatch {
 
@@ -56,7 +57,7 @@ public class ChessMatch {
         return mat;
     }
 
-    public boolean[][] possibleMoves(ChessPosition sourcePosition) {
+    public Set<Position> possibleMoves(ChessPosition sourcePosition) {
         var position = sourcePosition.toPosition();
         validateSourcePosition(position);
         return board.piece(position).possibleMoves();
@@ -101,8 +102,8 @@ public class ChessMatch {
         var kingPosition = king(color).getChessPosition().toPosition();
         var opponentPieces = getPieces(opponent(color));
         for (var p : opponentPieces) {
-            var mat = p.possibleMoves();
-            if (mat[kingPosition.getRow()][kingPosition.getColumn()]) {
+            var kingMoves = p.possibleMoves();
+            if (kingMoves.contains(kingPosition)) {
                 return true;
             }
         }
@@ -115,12 +116,9 @@ public class ChessMatch {
         var pieces = getPieces(color);
 
         for(var p : pieces){
-            var moves = p.possibleMovesStr();
-            for(var s : moves){
-                var row = s.charAt(0) - '0';
-                var column = s.charAt(1) - '0';
-
-                if(testIsPosibleToAvoidCheck(((ChessPiece)p).getChessPosition().toPosition(), new Position(row,column)))
+            var moves = p.possibleMoves();
+            for(var move : moves){
+                if(testIsPosibleToAvoidCheck(((ChessPiece)p).getChessPosition().toPosition(), move))
                     return false;
             }
         }

@@ -1,6 +1,6 @@
 package boardgame;
 
-import java.util.List;
+import java.util.Set;
 
 public abstract class Piece {
     protected Board board;
@@ -14,26 +14,14 @@ public abstract class Piece {
         return board;
     }
 
-    public abstract boolean[][] possibleMoves();
-
-    public abstract List<String> possibleMovesStr();
+    public abstract Set<Position> possibleMoves();
 
     public boolean possibleMove(Position position) {
-        return possibleMoves()[position.getRow()][position.getColumn()];
+        return possibleMoves().contains(position);
     }
 
     public boolean isThereAnyPossibleMove() {
-
-        var possibleMoves = possibleMoves();
-
-        for (var possibleMovesRow : possibleMoves) {
-            for (var possibleMove : possibleMovesRow) {
-                if (possibleMove)
-                    return true;
-            }
-        }
-
-        return false;
+        return possibleMoves().stream().findAny().isPresent();
     }
 
     protected boolean isValidMove(Position position) {

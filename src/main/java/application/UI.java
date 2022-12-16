@@ -1,16 +1,12 @@
 package application;
 
+import boardgame.Position;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.Color;
 
-import java.sql.SQLOutput;
-import java.util.Arrays;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class UI {
 
@@ -86,11 +82,11 @@ public class UI {
         System.out.println();
     }
 
-    public static void printBoard(ChessPiece[][] pieces, boolean[][] possibleMoves) {
+    public static void printBoard(ChessPiece[][] pieces, Set<Position> possibleMoves) {
         for (var i = 0; i < pieces.length; i++) {
             System.out.print((pieces.length - i) + " ");
             for (var j = 0; j < pieces[0].length; j++) {
-                printPiece(pieces[i][j], possibleMoves[i][j]);
+                printPiece(pieces[i][j], possibleMoves.contains(new Position(i,j)));
             }
             System.out.println();
         }

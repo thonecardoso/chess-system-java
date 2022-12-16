@@ -32,6 +32,22 @@ public class Position {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Position position)) return false;
+
+        if (getRow() != position.getRow()) return false;
+        return getColumn() == position.getColumn();
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getRow();
+        result = 31 * result + getColumn();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return String.format("%d, %d",this.row, this.column);
     }
