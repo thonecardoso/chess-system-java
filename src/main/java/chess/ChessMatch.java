@@ -117,7 +117,7 @@ public class ChessMatch {
         for(var p : pieces){
             var moves = p.possibleMoves();
             for(var move : moves){
-                if(testIsPosibleToAvoidCheck(((ChessPiece)p).getChessPosition().toPosition(), move))
+                if(testIsPossibleToAvoidCheck(((ChessPiece)p).getChessPosition().toPosition(), move))
                     return false;
             }
         }
@@ -129,7 +129,7 @@ public class ChessMatch {
         return piecesOnTheBoard.stream().filter(n -> ((ChessPiece) n).getColor() == color).toList();
     }
 
-    private boolean testIsPosibleToAvoidCheck(Position source, Position target) {
+    private boolean testIsPossibleToAvoidCheck(Position source, Position target) {
         var piece = board.removePiece(source);
         var capturedPiece = board.removePiece(target);
         board.placePiece(piece, target);
@@ -138,7 +138,7 @@ public class ChessMatch {
             piecesOnTheBoard.remove(capturedPiece);
             capturedPieces.add(capturedPiece);
         }
-        if(isCheck()){
+        if(testCheck(((ChessPiece) piece).getColor())){
             undoMove(source,target,capturedPiece);
             return false;
         }
