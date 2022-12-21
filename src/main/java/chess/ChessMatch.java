@@ -74,11 +74,9 @@ public class ChessMatch {
 
 
         Piece capturedPiece = null;
-        if (isCastling(source, target)) {
-            makeCastling(source, target);
-        } else {
+
             capturedPiece = makeMove(source, target);
-        }
+
 
         if (testCheck(currentPlayer)) {
             undoMove(source, target, capturedPiece);
@@ -164,6 +162,17 @@ public class ChessMatch {
         var capturedPiece = board.removePiece(target);
         board.placePiece(piece, target);
 
+        if(isCastling(source, target)){
+            if (target.getColumn() == source.getColumn() + 2) {
+                var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() + 3));
+                rook.increaseMoveCount();
+                board.placePiece(rook, new Position(source.getRow(), source.getColumn() + 1));
+            }
+            var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn()- 4));
+            rook.increaseMoveCount();
+            board.placePiece(rook, new Position(source.getRow(), source.getColumn() - 1));
+        }
+
         if (enPassant) {
             capturedPiece = board.removePiece(enPassantVulnerable.getChessPosition().toPosition());
         }
@@ -186,6 +195,17 @@ public class ChessMatch {
             board.placePiece(capturedPiece, target);
             capturedPieces.remove(capturedPiece);
             piecesOnTheBoard.add(capturedPiece);
+        }
+
+        if(isCastling(source, target)){
+            if (target.getColumn() == source.getColumn() + 2) {
+                var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() + 1));
+                rook.decreaseMoveCount();
+                board.placePiece(rook, new Position(source.getRow(), source.getColumn() + 3));
+            }
+            var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn()- 1));
+            rook.decreaseMoveCount();
+            board.placePiece(rook, new Position(source.getRow(), source.getColumn() - 4));
         }
 
         if (capturedPiece == enPassantVulnerable) {
@@ -295,11 +315,11 @@ public class ChessMatch {
         placeNewPiece('h', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('b', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('d', 8, new Queeen(board, Color.BLACK));
+        //placeNewPiece('b', 8, new Knight(board, Color.BLACK));
+        //placeNewPiece('g', 8, new Knight(board, Color.BLACK));
+        //placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+        //placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
+        //placeNewPiece('d', 8, new Queeen(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK, this));
     }
 }
