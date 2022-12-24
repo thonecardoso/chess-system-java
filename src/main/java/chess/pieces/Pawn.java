@@ -53,13 +53,13 @@ public class Pawn extends ChessPiece {
 
             var enPas = chessMatch.getEnPassantVulnerable();
             var p1 = new Position(position.getRow(), position.getColumn() + 1);
-            if(getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
+            if(position.getRow() == 3 && getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
                 moves.add(new Position(p1.getRow() - 1, p1.getColumn()));
 
             }
 
             p1.setValues(position.getRow(), position.getColumn() - 1);
-            if(getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
+            if(position.getRow() == 3 && getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
                 moves.add(new Position(p1.getRow() - 1, p1.getColumn()));
             }
 
@@ -93,13 +93,13 @@ public class Pawn extends ChessPiece {
 
             var enPas = chessMatch.getEnPassantVulnerable();
             var p1 = new Position(position.getRow(), position.getColumn() + 1);
-            if(getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
+            if(position.getRow() == 4 && getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
                 moves.add(new Position(p1.getRow() + 1, p1.getColumn()));
 
             }
 
             p1.setValues(position.getRow(), position.getColumn() - 1);
-            if(getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
+            if(position.getRow() == 4 && getBoard().positionExists(p1) && isThereOpponentPiece(p1) && board.piece(p1).equals(enPas)){
                 moves.add(new Position(p1.getRow() + 1, p1.getColumn()));
             }
         }

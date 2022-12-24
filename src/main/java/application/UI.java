@@ -54,7 +54,7 @@ public class UI {
         printCapturedPieces(captured);
         System.out.println();
         System.out.println("Turn : " + chessMatch.getTurn());
-        if (chessMatch.isCheckMate()) {
+        if (!chessMatch.isCheckMate()) {
             System.out.println("Waiting player: " + chessMatch.getCurrentPlayer());
             if (chessMatch.isCheck()) {
                 System.out.println("CHECK!");
@@ -127,4 +127,9 @@ public class UI {
 
     }
 
+    public static void printWinner(ChessMatch chessMatch) {
+        var winner = chessMatch.getCurrentPlayer() == Color.WHITE ? Color.BLACK : Color.WHITE;
+        System.out.println("CHECKMATE!");
+        System.out.println("Winner: " + winner);
+    }
 }

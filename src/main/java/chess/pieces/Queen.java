@@ -8,8 +8,8 @@ import chess.Color;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Queeen extends ChessPiece {
-    public Queeen(Board board, Color color) {
+public class Queen extends ChessPiece {
+    public Queen(Board board, Color color) {
         super(board, color);
     }
 
