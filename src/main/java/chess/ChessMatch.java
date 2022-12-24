@@ -224,10 +224,11 @@ public class ChessMatch {
                 var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() + 1));
                 rook.decreaseMoveCount();
                 board.placePiece(rook, new Position(source.getRow(), source.getColumn() + 3));
+            }else {
+                var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() - 1));
+                rook.decreaseMoveCount();
+                board.placePiece(rook, new Position(source.getRow(), source.getColumn() - 4));
             }
-            var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() - 1));
-            rook.decreaseMoveCount();
-            board.placePiece(rook, new Position(source.getRow(), source.getColumn() - 4));
         }
 
         if (enPassantVulnerable != null && capturedPiece == enPassantVulnerable) {
@@ -330,7 +331,7 @@ public class ChessMatch {
 
 
         placeNewPiece('a', 7, new Pawn(board, Color.BLACK, this));
-        placeNewPiece('b', 7, new Pawn(board, Color.BLACK, this));
+        placeNewPiece('b', 7, new Pawn(board, Color.WHITE, this));
         placeNewPiece('c', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('d', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('e', 7, new Pawn(board, Color.BLACK, this));
@@ -339,11 +340,11 @@ public class ChessMatch {
         placeNewPiece('h', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
         placeNewPiece('h', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('b', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('g', 8, new Knight(board, Color.BLACK));
-        placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
-        placeNewPiece('d', 8, new Queen(board, Color.BLACK));
+        //placeNewPiece('b', 8, new Knight(board, Color.BLACK));
+        //placeNewPiece('g', 8, new Knight(board, Color.BLACK));
+        //placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+        //placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
+        //placeNewPiece('d', 8, new Queen(board, Color.BLACK));
         placeNewPiece('e', 8, new King(board, Color.BLACK, this));
     }
 }
