@@ -2,9 +2,7 @@ package application;
 
 import chess.ChessException;
 import chess.ChessMatch;
-import chess.ChessPiece;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -14,7 +12,7 @@ public class Main {
 
         var sc = new Scanner(System.in);
         var chessMatch = new ChessMatch();
-        var captured = new ArrayList<ChessPiece>();
+
 
         while (!chessMatch.isCheckMate()) {
             if(chessMatch.isCheck()){
@@ -25,7 +23,7 @@ public class Main {
             }
             try {
                 UI.clearScreen();
-                UI.printMatch(chessMatch, captured);
+                UI.printMatch(chessMatch);
                 System.out.println();
                 System.out.print("Source: ");
                 var source = UI.readChessPosition(sc);
@@ -38,9 +36,7 @@ public class Main {
                 System.out.print("Target: ");
                 var target = UI.readChessPosition(sc);
 
-                var capturedPiece = chessMatch.performChessMove(source, target);
-
-                if (capturedPiece != null) captured.add(capturedPiece);
+                chessMatch.performChessMove(source, target);
 
                 if (chessMatch.getPromoted() != null) {
                     System.out.print("Enter piece for promotion (B/N/R/Q): ");
@@ -56,7 +52,6 @@ public class Main {
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
-
 
         }
 

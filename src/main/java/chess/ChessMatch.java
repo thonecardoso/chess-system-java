@@ -38,6 +38,10 @@ public class ChessMatch {
         return promoted;
     }
 
+    public List<ChessPiece> getCapturedPieces() {
+        return capturedPieces.stream().map(x -> (ChessPiece) x).toList();
+    }
+
     public ChessPiece getEnPassantVulnerable() {
         return enPassantVulnerable;
     }
@@ -70,12 +74,11 @@ public class ChessMatch {
         return board.piece(position).possibleMoves();
     }
 
-    public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
+    public void performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
         var source = sourcePosition.toPosition();
         var target = targetPosition.toPosition();
         validateSourcePosition(source);
         validateTargetPosition(source, target);
-
 
         var capturedPiece = makeMove(source, target);
 
