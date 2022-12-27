@@ -226,3 +226,15 @@ replay_pid*
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,eclipse,visualstudiocode
+/target/surefire-reports/chess.ChessMatchTest.txt
+/target/surefire-reports/chess.pieces.KingTest.txt
+/target/surefire-reports/chess.pieces.KnightTest.txt
+/target/surefire-reports/chess.pieces.RookTest.txt
+/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/target/surefire-reports/TEST-chess.ChessMatchTest.xml
+/target/surefire-reports/TEST-chess.pieces.KingTest.xml
+/target/surefire-reports/TEST-chess.pieces.KnightTest.xml
+/target/surefire-reports/TEST-chess.pieces.RookTest.xml
