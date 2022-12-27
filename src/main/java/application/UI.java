@@ -48,10 +48,10 @@ public class UI {
 
     }
 
-    public static void printMatch(ChessMatch chessMatch, List<ChessPiece> captured) {
+    public static void printMatch(ChessMatch chessMatch) {
         printBoard(chessMatch.getPieces());
         System.out.println();
-        printCapturedPieces(captured);
+        printCapturedPieces(chessMatch.getCapturedPieces());
         System.out.println();
         System.out.println("Turn : " + chessMatch.getTurn());
         if (!chessMatch.isCheckMate()) {
@@ -59,8 +59,7 @@ public class UI {
             if (chessMatch.isCheck()) {
                 System.out.println("CHECK!");
             }
-        }
-        else {
+        } else {
             System.out.println("CHECKMATE!");
             System.out.println("Winner: " + chessMatch.getCurrentPlayer());
         }
@@ -86,7 +85,7 @@ public class UI {
         for (var i = 0; i < pieces.length; i++) {
             System.out.print((pieces.length - i) + " ");
             for (var j = 0; j < pieces[0].length; j++) {
-                printPiece(pieces[i][j], possibleMoves.contains(new Position(i,j)));
+                printPiece(pieces[i][j], possibleMoves.contains(new Position(i, j)));
             }
             System.out.println();
         }
@@ -127,9 +126,13 @@ public class UI {
 
     }
 
-    public static void printWinner(ChessMatch chessMatch) {
-        var winner = chessMatch.getCurrentPlayer() == Color.WHITE ? Color.BLACK : Color.WHITE;
-        System.out.println("CHECKMATE!");
-        System.out.println("Winner: " + winner);
+    public static boolean printWinner(ChessMatch chessMatch) {
+        if (chessMatch.isCheckMate()) {
+            var winner = chessMatch.getCurrentPlayer() == Color.WHITE ? Color.BLACK : Color.WHITE;
+            System.out.println("CHECKMATE!");
+            System.out.println("Winner: " + chessMatch.getCurrentPlayer());
+            return true;
+        }
+        return false;
     }
 }

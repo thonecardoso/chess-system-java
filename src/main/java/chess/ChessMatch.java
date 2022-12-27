@@ -6,6 +6,7 @@ import boardgame.Position;
 import chess.pieces.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -15,19 +16,16 @@ public class ChessMatch {
     private int turn;
     private Color currentPlayer;
     private boolean check;
-    private boolean checkMate;
     private final List<Piece> piecesOnTheBoard = new ArrayList<>();
     private final List<Piece> capturedPieces = new ArrayList<>();
-
 
     private ChessPiece enPassantVulnerable;
     private ChessPiece promoted;
 
-    public ChessMatch() {
-        this.board = new Board(8, 8);
+    public ChessMatch(Board board) {
+        this.board = board;
         turn = 1;
         currentPlayer = Color.WHITE;
-        initialSetup();
     }
 
     public int getTurn() {
@@ -47,7 +45,7 @@ public class ChessMatch {
     }
 
     public boolean isCheckMate() {
-        return checkMate;
+        return testCheckMate(currentPlayer) || testCheckMate(opponent(currentPlayer));
     }
 
     public boolean isCheck() {
@@ -90,18 +88,14 @@ public class ChessMatch {
         promoted = null;
         if (isPromoting(source, target)) {
             promoted = (ChessPiece) board.piece(target);
-            replacePromotedPiece("Q");
+            //replacePromotedPiece("Q");
         }
 
         check = testCheck(opponent(currentPlayer));
 
+        if (!isCheckMate())
+            nextTurn();
 
-        checkMate = testCheckMate(opponent(currentPlayer));
-
-
-        if (!checkMate) nextTurn();
-
-        return (ChessPiece) capturedPiece;
     }
 
     public void replacePromotedPiece(String type) {
@@ -121,12 +115,13 @@ public class ChessMatch {
         piecesOnTheBoard.add(p);
 
         promoted = p;
+        check = testCheck(opponent(getCurrentPlayer()));
 
     }
 
 
     private void nextTurn() {
-        if(isCheckMate())
+        if (isCheckMate())
             return;
         turn++;
         currentPlayer = currentPlayer == Color.WHITE ? Color.BLACK : Color.WHITE;
@@ -154,7 +149,7 @@ public class ChessMatch {
     }
 
     private boolean testCheckMate(Color color) {
-        if (!isCheck()) return false;
+        if (!testCheck(color)) return false;
 
         var pieces = getPieces(color);
 
@@ -227,7 +222,7 @@ public class ChessMatch {
                 var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() + 1));
                 rook.decreaseMoveCount();
                 board.placePiece(rook, new Position(source.getRow(), source.getColumn() + 3));
-            }else {
+            } else {
                 var rook = (ChessPiece) board.removePiece(new Position(source.getRow(), source.getColumn() - 1));
                 rook.decreaseMoveCount();
                 board.placePiece(rook, new Position(source.getRow(), source.getColumn() - 4));
@@ -263,7 +258,7 @@ public class ChessMatch {
                 (
                         (piece.getColor() == Color.WHITE && target.getRow() == 0)
                                 ||
-                        (piece.getColor() == Color.BLACK && target.getRow() == 7)
+                                (piece.getColor() == Color.BLACK && target.getRow() == 7)
                 );
     }
 
@@ -314,6 +309,11 @@ public class ChessMatch {
         piecesOnTheBoard.add(piece);
     }
 
+    public void setupPieces(List<Pieces> pieces) {
+        pieces.forEach(piece -> board.placePiece(piece.chessPiece(), new ChessPosition(piece.column(), piece.row()).toPosition()));
+        piecesOnTheBoard.addAll(pieces.stream().map(Pieces::chessPiece).toList());
+    }
+
     private void initialSetup() {
         placeNewPiece('a', 2, new Pawn(board, Color.WHITE, this));
         placeNewPiece('b', 2, new Pawn(board, Color.WHITE, this));
@@ -334,7 +334,7 @@ public class ChessMatch {
 
 
         placeNewPiece('a', 7, new Pawn(board, Color.BLACK, this));
-        placeNewPiece('b', 7, new Pawn(board, Color.WHITE, this));
+        placeNewPiece('b', 7, new Queen(board, Color.WHITE));
         placeNewPiece('c', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('d', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('e', 7, new Pawn(board, Color.BLACK, this));
@@ -342,7 +342,7 @@ public class ChessMatch {
         placeNewPiece('g', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('h', 7, new Pawn(board, Color.BLACK, this));
         placeNewPiece('a', 8, new Rook(board, Color.BLACK));
-        placeNewPiece('h', 8, new Rook(board, Color.BLACK));
+        //placeNewPiece('h', 8, new Rook(board, Color.BLACK));
         //placeNewPiece('b', 8, new Knight(board, Color.BLACK));
         //placeNewPiece('g', 8, new Knight(board, Color.BLACK));
         //placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
