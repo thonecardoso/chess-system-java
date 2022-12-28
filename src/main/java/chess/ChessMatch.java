@@ -241,7 +241,7 @@ public class ChessMatch {
     }
 
     private boolean isCastling(Position source, Position target) {
-        return board.piece(source) instanceof King && ((target.getColumn() == source.getColumn() + 2) || (target.getColumn() == source.getColumn() - 2));
+        return board.piece(target) instanceof King && ((target.getColumn() == source.getColumn() + 2) || (target.getColumn() == source.getColumn() - 2));
     }
 
     private boolean isEnPassant(Position source, Position target) {
