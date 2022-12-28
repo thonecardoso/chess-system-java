@@ -241,4 +241,14 @@ public class ChessExceptionTest {
         //Act-Assert
         Assertions.assertThrowsExactly(ChessException.class, () -> chessMatch.performChessMove(s1, t1), "You can't put yourself in check");
     }
+
+    @Test
+    void whenAnInvalidPositionIsInformedThenAnExceptionShouldBeThrown() {
+
+        //Arrange-Act-Assert
+        Assertions.assertThrowsExactly(ChessException.class, () -> new ChessPosition('i', 1), "Error instantiating ChessPosition. Valid values are from a1 to h8.");
+        Assertions.assertThrowsExactly(ChessException.class, () -> new ChessPosition('k', 1), "Error instantiating ChessPosition. Valid values are from a1 to h8.");
+        Assertions.assertThrowsExactly(ChessException.class, () -> new ChessPosition('a', 0), "Error instantiating ChessPosition. Valid values are from a1 to h8.");
+        Assertions.assertThrowsExactly(ChessException.class, () -> new ChessPosition('a', 9), "Error instantiating ChessPosition. Valid values are from a1 to h8.");
+    }
 }
