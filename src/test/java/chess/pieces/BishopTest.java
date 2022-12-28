@@ -15,7 +15,7 @@ public class BishopTest {
     void whenPossibleMovesWasCallItShouldReturnsSevenMoves() {
 
         //Arrange
-        var board = new Board(8,8);
+        var board = new Board(8, 8);
         var chessMatch = new ChessMatch(board);
         var pieces = List.of(
                 new Pieces('c', 1, new Bishop(board, Color.WHITE)),
@@ -26,17 +26,17 @@ public class BishopTest {
         chessMatch.setupPieces(pieces);
 
         //Act
-        var moves = chessMatch.possibleMoves(new ChessPosition('c',1));
+        var moves = chessMatch.possibleMoves(new ChessPosition('c', 1));
 
         //Assert
-        Assertions.assertEquals(7,moves.size());
+        Assertions.assertEquals(7, moves.size());
     }
 
     @Test
     void whenPossibleMovesWasCallItShouldReturnsTwoMoves() {
 
         //Arrange
-        var board = new Board(8,8);
+        var board = new Board(8, 8);
         var chessMatch = new ChessMatch(board);
         var pieces = List.of(
                 new Pieces('c', 1, new Bishop(board, Color.WHITE)),
@@ -47,17 +47,17 @@ public class BishopTest {
         chessMatch.setupPieces(pieces);
 
         //Act
-        var moves = chessMatch.possibleMoves(new ChessPosition('c',1));
+        var moves = chessMatch.possibleMoves(new ChessPosition('c', 1));
 
         //Assert
-        Assertions.assertEquals(2,moves.size());
+        Assertions.assertEquals(2, moves.size());
     }
 
     @Test
     void whenPossibleMovesWasCallItShouldReturnsThreeMoves() {
 
         //Arrange
-        var board = new Board(8,8);
+        var board = new Board(8, 8);
         var chessMatch = new ChessMatch(board);
         var pieces = List.of(
                 new Pieces('c', 1, new Bishop(board, Color.WHITE)),
@@ -68,9 +68,20 @@ public class BishopTest {
         chessMatch.setupPieces(pieces);
 
         //Act
-        var moves = chessMatch.possibleMoves(new ChessPosition('c',1));
+        var moves = chessMatch.possibleMoves(new ChessPosition('c', 1));
 
         //Assert
-        Assertions.assertEquals(3,moves.size());
+        Assertions.assertEquals(3, moves.size());
+    }
+
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
+
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new Bishop(board, Color.WHITE);
+
+        //Act-Assert
+        Assertions.assertEquals("B", p.toString());
     }
 }

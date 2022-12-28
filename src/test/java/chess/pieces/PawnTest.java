@@ -168,6 +168,15 @@ public class PawnTest {
         Assertions.assertEquals(2,moves.size());
     }
 
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
 
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new Pawn(board, Color.WHITE, null);
+
+        //Act-Assert
+        Assertions.assertEquals("P", p.toString());
+    }
 
 }

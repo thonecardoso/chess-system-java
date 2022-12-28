@@ -79,5 +79,15 @@ public class QueenTest {
         Assertions.assertEquals(12,moves.size());
     }
 
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
+
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new Queen(board, Color.WHITE);
+
+        //Act-Assert
+        Assertions.assertEquals("Q", p.toString());
+    }
 
 }

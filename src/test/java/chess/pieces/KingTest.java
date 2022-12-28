@@ -142,4 +142,15 @@ public class KingTest {
         Assertions.assertInstanceOf(King.class, blackKing);
         Assertions.assertInstanceOf(King.class, whiteKing);
     }
+
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
+
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new King(board, Color.WHITE, null);
+
+        //Act-Assert
+        Assertions.assertEquals("K", p.toString());
+    }
 }

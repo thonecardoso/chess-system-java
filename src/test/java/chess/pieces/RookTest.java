@@ -37,4 +37,15 @@ public class RookTest {
         Assertions.assertEquals(14,moves.size());
         Assertions.assertTrue(chessPositions.containsAll(moves));
     }
+
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
+
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new Rook(board, Color.WHITE);
+
+        //Act-Assert
+        Assertions.assertEquals("R", p.toString());
+    }
 }

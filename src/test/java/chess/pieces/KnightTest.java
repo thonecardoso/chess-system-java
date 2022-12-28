@@ -54,4 +54,15 @@ public class KnightTest {
         //Assert
         Assertions.assertEquals(2,moves.size());
     }
+
+    @Test
+    void whenToStringIsCallItShouldReturnsKeyLetter() {
+
+        //Arrange
+        var board = new Board(8, 8);
+        var p = new Knight(board, Color.WHITE);
+
+        //Act-Assert
+        Assertions.assertEquals("N", p.toString());
+    }
 }
