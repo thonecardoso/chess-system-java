@@ -133,7 +133,7 @@ public class ChessMatch {
 
     private ChessPiece king(Color color) {
         var king = piecesOnTheBoard.stream().filter(n -> n instanceof King && ((King) n).getColor() == color).findFirst();
-        return (ChessPiece) king.orElseThrow(() -> new IllegalStateException("There is no " + color + "king on the board"));
+        return (ChessPiece) king.orElseThrow(() -> new IllegalStateException("There is no " + color + " king on the board"));
     }
 
     private boolean testCheck(Color color) {
