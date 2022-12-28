@@ -21,6 +21,7 @@ public class ChessMatch {
 
     private ChessPiece enPassantVulnerable;
     private ChessPiece promoted;
+    private boolean checkMate;
 
     public ChessMatch(Board board) {
         this.board = board;
@@ -45,7 +46,7 @@ public class ChessMatch {
     }
 
     public boolean isCheckMate() {
-        return testCheckMate(currentPlayer) || testCheckMate(opponent(currentPlayer));
+        return checkMate;
     }
 
     public boolean isCheck() {
@@ -88,10 +89,12 @@ public class ChessMatch {
         promoted = null;
         if (isPromoting(source, target)) {
             promoted = (ChessPiece) board.piece(target);
-            //replacePromotedPiece("Q");
         }
 
         check = testCheck(opponent(currentPlayer));
+        checkMate = testCheckMate(opponent(currentPlayer));
+
+        if(promoted != null) return;
 
         if (!isCheckMate())
             nextTurn();
@@ -115,7 +118,11 @@ public class ChessMatch {
         piecesOnTheBoard.add(p);
 
         promoted = p;
-        check = testCheck(opponent(getCurrentPlayer()));
+        check = testCheck(opponent(currentPlayer));
+        checkMate = testCheckMate(opponent(currentPlayer));
+
+        if (!isCheckMate())
+            nextTurn();
 
     }
 
@@ -158,7 +165,7 @@ public class ChessMatch {
             var source = ((ChessPiece) p).getChessPosition().toPosition();
             for (var target : moves) {
                 var capturedPiece = makeMove(source, target);
-                if (testCheck(color)) {
+                if (!testCheck(color)) {
                     undoMove(source, target, capturedPiece);
                     return false;
                 }
