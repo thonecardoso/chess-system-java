@@ -23,7 +23,7 @@ public class RookTest {
         var chessMatch = new ChessMatch(board);
         var pieces = List.of(
                 new Pieces('a', 1, new Rook(board, Color.WHITE)),
-                new Pieces('e', 1, new King(board, Color.WHITE, chessMatch)),
+                new Pieces('e', 2, new King(board, Color.WHITE, chessMatch)),
                 new Pieces('e', 8, new King(board, Color.BLACK, chessMatch))
         );
         chessMatch.setupPieces(pieces);
