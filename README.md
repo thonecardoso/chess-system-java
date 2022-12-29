@@ -53,6 +53,6 @@ The project was covered by some unit tests to help with a refactoring, they were
 
 As the project's main focus wasn't unit tests, it don't cover 100%, but it reached a considerable percentage, covering the main features.
 
-To see the complete coverage report open the **[link](https://github.com/thonecardoso/chess-system-java/blob/main/coverage/index.html)**
+To see the complete coverage report open the **[link](https://thonecardoso.github.io/chess-system-java/)**
 
 ![](./assets/codeCoverage.png)
