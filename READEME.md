@@ -35,9 +35,9 @@ java -cp .\bin\ .\src\main\java\application\Main.java
 
 ###### Pieces symbols
 
-| Pawn![](C:\Projetos\chess-system\assets\pieces\pawn.svg) | Rook![rook](C:\Projetos\chess-system\assets\pieces\rook.svg) | Knight![](C:\Projetos\chess-system\assets\pieces\knight.svg) | Bishop![](C:\Projetos\chess-system\assets\pieces\bishop.svg) | Queen![](C:\Projetos\chess-system\assets\pieces\queen.svg) | King![](C:\Projetos\chess-system\assets\pieces\king.svg) |
-| :------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :----------------------------------------------------------: | :--------------------------------------------------------: | :------------------------------------------------------: |
-|                          **P**                           |                            **R**                             |                            **N**                             |                            **B**                             |                           **Q**                            |                          **K**                           |
+| Pawn![](C:\Projetos\chess-system\assets\pieces\pawn.svg) | Rook![](C:\Projetos\chess-system\assets\pieces\rook.svg) | Knight![](C:\Projetos\chess-system\assets\pieces\knight.svg) | Bishop![](C:\Projetos\chess-system\assets\pieces\bishop.svg) | Queen![](C:\Projetos\chess-system\assets\pieces\queen.svg) | King![](C:\Projetos\chess-system\assets\pieces\king.svg) |
+| :------------------------------------------------------: |:--------------------------------------------------------:| :----------------------------------------------------------: | :----------------------------------------------------------: | :--------------------------------------------------------: | :------------------------------------------------------: |
+|                          **P**                           |                          **R**                           |                            **N**                             |                            **B**                             |                           **Q**                            |                          **K**                           |
 
 ### Diagram class
 
